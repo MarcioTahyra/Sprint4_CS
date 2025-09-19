@@ -4,6 +4,11 @@
 Esta solução é uma **API RESTful** desenvolvida em **.NET 8** e **C# 12**, que gerencia clientes, ativos financeiros e carteiras de investimentos, além de fornecer **recomendações personalizadas**.  
 O sistema utiliza **Entity Framework Core** para persistência em banco **Oracle**.
 
+## Importante
+Alterar as credenciais no arquivo 'AppDBContext.cs':
+```
+string connString = "User Id=" + "XXX" + ";Password=" + "XXX" + ";Data Source=" + DataSource;
+```
 ---
 
 ## Funcionalidades
