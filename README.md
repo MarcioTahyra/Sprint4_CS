@@ -77,3 +77,7 @@ A API possui **documentação automática via Swagger**, incluindo comentários 
 * **Entity Framework Core**
 * **Oracle Database**
 * **Swagger / OpenAPI**
+
+## Diagrama de Classe
+<img width="1600" height="739" alt="New Project" src="https://github.com/user-attachments/assets/0c12a4a0-c9d0-4540-9c2a-59f7049a782a" />
+
