@@ -1,8 +1,8 @@
-# FIAPOracleEF - Sistema de Recomendação de Investimentos
+# Sistema de Recomendação de Investimentos
 
 ## Descrição
 Esta solução é uma **API RESTful** desenvolvida em **.NET 8** e **C# 12**, que gerencia clientes, ativos financeiros e carteiras de investimentos, além de fornecer **recomendações personalizadas**.  
-O sistema utiliza **Entity Framework Core** para persistência em banco **Oracle** e segue boas práticas de arquitetura em camadas.
+O sistema utiliza **Entity Framework Core** para persistência em banco **Oracle**.
 
 ---
 
