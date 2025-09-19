@@ -1,0 +1,29 @@
+[
+    {
+        "Id": 1,
+        "Nome": "Tesouro Direto 2025",
+        "Tipo": "Renda Fixa",
+        "Rendimento": 8.5,
+        "Descricao": "T�tulos p�blicos do Tesouro Direto com vencimento em 2025.",
+        "Liquidez": "Alta",
+        "Risco": "Baixo"
+    },
+    {
+        "Id": 2,
+        "Nome": "A��o Petrobras",
+        "Tipo": "Renda Vari�vel",
+        "Rendimento": 12.2,
+        "Descricao": "A��es da Petrobras com alta volatilidade.",
+        "Liquidez": "M�dia",
+        "Risco": "Alto"
+    },
+    {
+        "Id": 3,
+        "Nome": "Fundo Imobili�rio XP",
+        "Tipo": "Fundo de Investimento",
+        "Rendimento": 9.7,
+        "Descricao": "Fundo imobili�rio com foco em im�veis comerciais.",
+        "Liquidez": "M�dia",
+        "Risco": "Moderado"
+    }
+]
