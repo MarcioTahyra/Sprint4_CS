@@ -1,5 +1,10 @@
 # Sistema de Recomendação de Investimentos
 
+## Integrantes
+- Gustavo Kenzo - 98481
+- Vinícius Almeida Bernardino de Souza - 97888
+- Márcio Hitoshi Tahyra - 552511
+
 ## Descrição
 Esta solução é uma **API RESTful** desenvolvida em **.NET 8** e **C# 12**, que gerencia clientes, ativos financeiros e carteiras de investimentos, além de fornecer **recomendações personalizadas**.  
 O sistema utiliza **Entity Framework Core** para persistência em banco **Oracle**.
