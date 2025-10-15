@@ -40,6 +40,8 @@ Preencha o arquivo `appsettings.json` com os seguintes valores:
 
 #### 2.2. Ambiente Cloud (Azure/AWS)
 
+https://sprint4cs-ggdqhdhrhzdja7fv.brazilsouth-01.azurewebsites.net/
+
 As seguintes **variáveis de ambiente** e **connection strings** formam definidas:
 
 | Serviço    | Nome da Variável Cloud                    | Valor                          |
