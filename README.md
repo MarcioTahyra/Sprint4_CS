@@ -1,83 +1,112 @@
-# Sistema de Recomendação de Investimentos
+# Sistema de Recomendação de Investimentos com Inteligência Artificial
 
 ## Integrantes
-- Gustavo Kenzo - 98481
-- Vinícius Almeida Bernardino de Souza - 97888
-- Márcio Hitoshi Tahyra - 552511
+- **Gustavo Kenzo** – 98481  
+- **Vinícius Almeida Bernardino de Souza** – 97888  
+- **Márcio Hitoshi Tahyra** – 552511  
+
+---
 
 ## Descrição
-Esta solução é uma **API RESTful** desenvolvida em **.NET 8** e **C# 12**, que gerencia clientes, ativos financeiros e carteiras de investimentos, além de fornecer **recomendações personalizadas**.  
-O sistema utiliza **Entity Framework Core** para persistência em banco **Oracle**.
+Esta solução é uma **API RESTful** desenvolvida em **.NET 8** e **C# 12**, que gerencia clientes e ativos financeiros.  
+O grande diferencial é o **módulo de Recomendação com IA**, que fornece **sugestões de investimento** e uma **justificativa analítica** gerada pela **Google Gemini API**.  
 
-## Importante
-Alterar as credenciais no arquivo 'AppDBContext.cs':
+O sistema utiliza **Entity Framework Core** para persistência em **banco Oracle**.
+
+---
+
+## Configuração e Execução
+
+### 1. Pré-requisitos
+- .NET 8 SDK
+- Acesso ao **Oracle Database**
+- Chave válida da **Google Gemini API**
+
+---
+
+### 2. Configuração de Credenciais (Importante)
+Preencha o arquivo `appsettings.json` com os seguintes valores:
+
+```json
+{
+  "ConnectionStrings": {
+    "OracleConnection": "User Id=XXX;Password=XXX;Data Source=oracle.fiap.com.br:1521/ORCL"
+  },
+  "GeminiApi": {
+    "ApiKey": "[SUA_CHAVE_API_GEMINI]"
+  }
+}
+````
+
+#### 2.2. Ambiente Cloud (Azure/AWS)
+
+https://sprint4cs-ggdqhdhrhzdja7fv.brazilsouth-01.azurewebsites.net/
+
+As seguintes **variáveis de ambiente** e **connection strings** formam definidas:
+
+| Serviço    | Nome da Variável Cloud                    | Valor                          |
+| :--------- | :---------------------------------------- | :----------------------------- |
+| Oracle DB  | `OracleConnection` (Connection String)    | Sstring de conexão             |
+| Gemini API | `GeminiApi__ApiKey` (Application Setting) | Chave da Google Gemini API     |
+
+---
+
+### 3. Como Executar
+
+```bash
+dotnet restore
+dotnet build
+dotnet run
 ```
-string connString = "User Id=" + "XXX" + ";Password=" + "XXX" + ";Data Source=" + DataSource;
-```
+
+---
+
+### 4. Acessar Swagger
+
+A documentação e os testes podem ser acessados via Swagger:
+
+[https://localhost:7146/swagger](https://localhost:7146/swagger)
+
 ---
 
 ## Funcionalidades
-- **Clientes:** Cadastro, consulta, atualização e remoção de clientes.  
-- **Ativos:** Cadastro, consulta, atualização, remoção e importação de ativos via arquivo JSON.  
-- **Carteiras:** Associação de ativos a clientes e controle de quantidade.  
-- **Recomendações:** Geração de recomendações de investimentos com base no perfil e objetivo do cliente.
+
+* **Clientes (CRUD):** Cadastro, consulta, atualização e remoção
+* **Ativos (CRUD):** Gerenciamento e importação via arquivo JSON
+* **Recomendações com IA:** Sugestões de investimentos com **justificativa gerada pelo Gemini API**
 
 ---
 
-## Estrutura do Projeto
-- **Models:** Entidades de domínio (`Cliente`, `Ativo`, `Carteira`, `CarteiraDeInvestimentos`, DTOs).  
-- **Controllers:** Endpoints para operações CRUD e importação de dados.  
-- **Services:** Lógica de negócio, como importação de ativos e cálculos de recomendação.  
-- **Database:** Contexto do Entity Framework e repositórios.
+## Principais Endpoints (Destaque para a IA)
+
+|  Método  | Endpoint                         | Descrição                                                                                |
+| :------: | :------------------------------- | :--------------------------------------------------------------------------------------- |
+|  **GET** | `/api/recomendacao/cliente/{id}` | **Endpoint principal:** retorna a carteira recomendada e a justificativa analítica da IA |
+|  **GET** | `/api/clientes`                  | Lista todos os clientes                                                                  |
+| **POST** | `/api/clientes`                  | Cria um novo cliente                                                                     |
+|  **GET** | `/api/ativos`                    | Lista todos os ativos                                                                    |
+| **POST** | `/api/ativos/carregar-json`      | Importa ativos de um arquivo JSON                                                        |
+| **GET**  | `/api/ativos/pesquisa`           | Retorna ativos filtrados por Tipo e Risco (usando LINQ com filtros dinâmicos).           |
+| **GET**  | `/api/cliente/por-perfil`        | Retorna clientes filtrados por Perfil do Investidor (usando LINQ).                       |
 
 ---
 
-## Como Executar
-1. **Pré-requisitos:**
-   - .NET 8 SDK 
-   - Banco **Oracle** disponível (ajuste a string de conexão em `AppDbContext`)  
-
-2. **Executar a aplicação:**
-   ```bash
-   dotnet restore
-   dotnet build
-   dotnet run
-
-
-3. **Acessar Swagger para documentação e testes:**
-
-   ```
-   https://localhost:5001/swagger
-   ```
-
----
-
-## Principais Endpoints
-
-| Método | Endpoint                          | Descrição                          |
-| ------ | --------------------------------- | ---------------------------------- |
-| GET    | /api/clientes                     | Lista todos os clientes            |
-| POST   | /api/clientes                     | Cria um novo cliente               |
-| GET    | /api/ativos                       | Lista todos os ativos              |
-| POST   | /api/ativos/carregar-json         | Importa ativos de um arquivo JSON  |
-| POST   | /api/recomendacao/carregar-ativos | Gera recomendação de investimentos |
+## Arquitetura do Sistema
+<img width="4074" height="2958" alt="image" src="https://github.com/user-attachments/assets/a3906d44-a7fb-43d6-ab4d-4a2ff80ba3a2" />
 
 ---
 
 ## Documentação
 
-A API possui **documentação automática via Swagger**, incluindo comentários XML dos controllers e modelos.
+A API possui **documentação automática via Swagger**, incluindo **comentários XML** dos controllers e modelos para facilitar a utilização.
 
 ---
 
-## Tecnologias
+## Tecnologias Utilizadas
 
-* **.NET 8**
-* **C# 12**
-* **Entity Framework Core**
-* **Oracle Database**
-* **Swagger / OpenAPI**
-
-## Diagrama de Classe
-<img width="1600" height="739" alt="New Project" src="https://github.com/user-attachments/assets/0c12a4a0-c9d0-4540-9c2a-59f7049a782a" />
-
+* .NET 8
+* C# 12
+* Entity Framework Core
+* Oracle Database
+* Google Gemini API (Integração de IA)
+* Swagger / OpenAPI
