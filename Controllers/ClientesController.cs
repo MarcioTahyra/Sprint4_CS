@@ -65,6 +65,30 @@ namespace FIAPApi.Controllers
         }
 
         /// <summary>
+        /// Retorna clientes filtrados por Perfil do Investidor (usando LINQ).
+        /// </summary>
+        /// <param name="perfil">O perfil do investidor (ex: Conservador, Moderado, Agressivo).</param>
+        [HttpGet("por-perfil/{perfil}")]
+        public IActionResult GetClientesByPerfil(string perfil)
+        {
+            if (string.IsNullOrEmpty(perfil))
+            {
+                return BadRequest("O perfil de investimento é obrigatório para a pesquisa.");
+            }
+
+            var clientes = _context.Clientes
+                .Where(c => c.Perfil.ToLower() == perfil.ToLower())
+                .ToList();
+
+            if (!clientes.Any())
+            {
+                return NotFound($"Nenhum cliente encontrado com o perfil '{perfil}'.");
+            }
+
+            return Ok(clientes);
+        }
+
+        /// <summary>
         /// Atualiza os dados de um cliente existente.
         /// </summary>
         [HttpPut("{id}")]

@@ -45,6 +45,38 @@ public class AtivosController : ControllerBase
     }
 
     /// <summary>
+    /// Retorna ativos filtrados por Tipo e Risco (usando LINQ com filtros dinâmicos).
+    /// </summary>
+    /// <param name="tipo">Tipo de ativo (ex: Renda Fixa, Ações).</param>
+    /// <param name="risco">Nível de risco (opcional, ex: Baixo, Alto).</param>
+    [HttpGet("pesquisa")]
+    public ActionResult<IEnumerable<Ativo>> GetAtivosFiltrados([FromQuery] string tipo, [FromQuery] string risco)
+    {
+        if (string.IsNullOrEmpty(tipo))
+        {
+            return BadRequest("O parâmetro 'tipo' é obrigatório para a pesquisa.");
+        }
+
+        var query = _context.Ativos.AsQueryable()
+            .Where(a => a.Tipo.ToLower() == tipo.ToLower());
+
+        if (!string.IsNullOrEmpty(risco))
+        {
+            query = query.Where(a => a.Risco.ToLower() == risco.ToLower());
+        }
+
+        var ativos = query.ToList();
+
+
+        if (!ativos.Any())
+        {
+            return NotFound($"Nenhum ativo encontrado com Tipo '{tipo}' e Risco '{risco ?? "qualquer"}'");
+        }
+
+        return Ok(ativos);
+    }
+
+    /// <summary>
     /// Adiciona um novo ativo.
     /// </summary>
     [HttpPost]
